@@ -8,8 +8,14 @@ for more options.
 #define OLED_BRIGHTNESS 64
 #define SPLIT_WPM_ENABLE
 #define MASTER_RIGHT
+/* Match the seller's Sofle RGB firmware: D3, 36 LEDs on each half. */
 #undef RGBLED_NUM
-#define RGBLED_NUM 12
+#undef RGBLIGHT_LED_COUNT
+#define RGBLIGHT_LED_COUNT 72
+#undef RGBLED_SPLIT
+#define RGBLED_SPLIT { 36, 36 }
+#define RGBLIGHT_LIMIT_VAL 120
+#define RGBLIGHT_DEFAULT_VAL 32
 #define RGBLIGHT_HUE_STEP 8
 #define RGBLIGHT_SAT_STEP 8
 #undef LOCKING_SUPPORT_ENABLE
