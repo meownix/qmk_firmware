@@ -163,7 +163,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `----------------------------------'           '------''---------------------------'
  */
   [_ADJUST] = LAYOUT(
-  XXXXXXX , RGB_TOG,  RGB_HUD ,  RGB_HUI , RGB_VAD, RGB_VAI,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  XXXXXXX , RGB_TOG,  RGB_HUD ,  RGB_HUI , RGB_VAD, RGB_VAI,                     RGB_RMOD, RGB_MOD, RGB_SPD, RGB_SPI, XXXXXXX, XXXXXXX,
   QK_BOOT  , XXXXXXX,KC_QWERTY,KC_COLEMAKDH,KC_DVORAK,XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   XXXXXXX , XXXXXXX, XXXXXXX, KC_MOUSEKEY,  XXXXXXX,  XXXXXXX,                     XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
   XXXXXXX , XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
@@ -266,7 +266,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 
 // OLED setup for bongocat
 #define ANIM_FRAME_DURATION 75
-#define ANIM_SIZE 636 // Number of bytes in array, minimize for adequate firmware size, max is 1024
+#define ANIM_SIZE 512 // Full 128x32 OLED frame; avoid unused padding in flash.
 #define IDLE_FRAMES 5
 #define IDLE_TIMEOUT 750 // The amount of time it takes to return to idle
 #define TAP_FRAMES 2

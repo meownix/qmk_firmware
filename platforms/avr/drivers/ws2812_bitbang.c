@@ -158,6 +158,11 @@ void ws2812_init(void) {
 }
 
 void ws2812_set_color(int index, uint8_t red, uint8_t green, uint8_t blue) {
+    // Split RGB clipping can produce wrapped indices for the other half.
+    // Ignore them instead of writing past the LED buffer into unrelated RAM.
+    if ((unsigned int)index >= WS2812_LED_COUNT) {
+        return;
+    }
     ws2812_leds[index].r = red;
     ws2812_leds[index].g = green;
     ws2812_leds[index].b = blue;

@@ -11,8 +11,9 @@ QWERTY/Colemak-DH/Dvorak layouts, media controls, and the mouse layer.
 ## RGB lighting
 
 The RGB configuration matches the recovered seller firmware: WS2812-compatible
-LEDs on D3, with 72 configured LEDs split 36 per half. Only static lighting is
-enabled to leave room for Bongo Cat. The initial brightness is 32/255 and the
+LEDs on D3, with 72 configured LEDs split 36 per half. Static lighting,
+breathing, rainbow mood (color cycling), and rainbow swirl are enabled.
+The initial brightness is 32/255 and the
 maximum is capped at 120/255. Saved EEPROM settings can override the initial
 brightness and enabled state.
 
@@ -28,6 +29,25 @@ keys normally type:
 | 4th (normally 3) | Next hue |
 | 5th (normally 4) | Lower brightness |
 | 6th (normally 5) | Raise brightness |
+
+While holding **Lower and Raise**, the right half's top row adds these controls,
+counting from its inner edge beside the OLED toward its outer right edge:
+
+| Physical key position | Action |
+| --- | --- |
+| 1st (normally 6) | Previous effect |
+| 2nd (normally 7) | Next effect |
+| 3rd (normally 8) | Decrease QMK's generic speed setting |
+| 4th (normally 9) | Increase QMK's generic speed setting |
+
+Effect cycling includes static lighting and the animation families' built-in
+speed/direction variants. In this QMK revision, these effects use their mode
+variants for visible speed changes; the generic speed setting saved by keys
+8/9 does not change their timing. Use keys 6/7 to select a faster/slower variant.
+Hue controls select the color for static/breathing;
+rainbow effects choose their own hue. Brightness controls apply to static and
+rainbow effects; QMK breathing uses its own pulse envelope, capped at 120/255.
+The saved static mode stays static after updating; use Next effect to animate.
 
 These controls save their settings. Existing layout selection, mouse selection,
 bootloader, and media keys on Adjust stay in their original positions.
@@ -45,6 +65,12 @@ Caps Lock is highlighted according to the host's LED state. Its binding is
 
 The left Bongo Cat display has a shortened table line and clears once when
 returning to the QMK logo, avoiding leftover pixels along the display edge.
+Its frame arrays use the actual 512-byte OLED frame size rather than reserving
+unused padding, leaving flash space for the RGB effects without removing frames.
+
+The AVR WS2812 driver rejects indices outside its LED buffer. Split clipping
+can wrap indices belonging to the other half; ignoring those writes prevents
+RGB animations from corrupting nearby OLED memory.
 
 ## Original layout reference
 
